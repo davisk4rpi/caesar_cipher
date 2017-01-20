@@ -1,7 +1,11 @@
 require 'sinatra'
+require 'sinatra/reloader'
 
 get '/' do
-	"Hello World!"
+	string = params["string"]
+	shift = params["shift"].to_i
+	new_string = caesar_cipher(string, shift)
+	erb :index, :locals => {:string => new_string}
 end
 
 def caesar_cipher string, shift
